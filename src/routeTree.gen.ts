@@ -13,7 +13,7 @@
 import { Route as rootRoute } from './routes/__root'
 import { Route as FundsImport } from './routes/funds'
 import { Route as IndexImport } from './routes/index'
-import { Route as FundsIdImport } from './routes/funds.$id'
+import { Route as FundsSlugIdImport } from './routes/funds.$slug.$id'
 
 // Create/Update Routes
 
@@ -27,10 +27,12 @@ const IndexRoute = IndexImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const FundsIdRoute = FundsIdImport.update({
-  path: '/$id',
+const FundsSlugIdRoute = FundsSlugIdImport.update({
+  path: '/$slug/$id',
   getParentRoute: () => FundsRoute,
-} as any).lazy(() => import('./routes/funds.$id.lazy').then((d) => d.Route))
+} as any).lazy(() =>
+  import('./routes/funds.$slug.$id.lazy').then((d) => d.Route),
+)
 
 // Populate the FileRoutesByPath interface
 
@@ -44,8 +46,8 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FundsImport
       parentRoute: typeof rootRoute
     }
-    '/funds/$id': {
-      preLoaderRoute: typeof FundsIdImport
+    '/funds/$slug/$id': {
+      preLoaderRoute: typeof FundsSlugIdImport
       parentRoute: typeof FundsImport
     }
   }
@@ -55,7 +57,7 @@ declare module '@tanstack/react-router' {
 
 export const routeTree = rootRoute.addChildren([
   IndexRoute,
-  FundsRoute.addChildren([FundsIdRoute]),
+  FundsRoute.addChildren([FundsSlugIdRoute]),
 ])
 
 /* prettier-ignore-end */

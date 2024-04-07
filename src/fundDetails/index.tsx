@@ -2,7 +2,7 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { fundDetailsQueryOptions } from "./api";
 import { Link, getRouteApi } from "@tanstack/react-router";
 
-const route = getRouteApi("/funds/$id");
+const route = getRouteApi("/funds/$slug/$id");
 
 export default function FundDetails() {
   const params = route.useParams();

@@ -8,7 +8,7 @@ export default function FundListAndFundDetails() {
   return (
     <>
       <FundList />
-      <MatchRoute to="/funds/$id">
+      <MatchRoute to="/funds/$slug/$id">
         {(open) => (
           <Drawer anchor="right" open={!!open} onClose={onClose}>
             <Stack flex={1} p={4} maxWidth="500px" gap={4} width="100vw">

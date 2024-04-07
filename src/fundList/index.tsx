@@ -12,7 +12,11 @@ export default function FundList() {
       <ul>
         {data.map((d) => (
           <li key={d.id}>
-            <Link from={route.id} to={"/funds/$id"} params={{ id: d.id }}>
+            <Link
+              from={route.id}
+              to={"/funds/$slug/$id"}
+              params={{ id: d.id, slug: d.title.split(" ")[0] }}
+            >
               {d.title}
             </Link>
           </li>
