@@ -4,7 +4,7 @@ import { Link, MatchRoute, Outlet, useNavigate } from "@tanstack/react-router";
 
 export default function FundListAndFundDetails() {
   const navigate = useNavigate();
-  const onClose = () => navigate({ to: "/funds" });
+  const onClose = () => navigate({ to: "/funds", search: {} });
   return (
     <>
       <FundList />
