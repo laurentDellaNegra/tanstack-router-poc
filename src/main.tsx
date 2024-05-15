@@ -13,6 +13,8 @@ import { buildUser } from "./common/user";
 
 export const queryClient = new QueryClient();
 
+console.log("location.pathname", location.pathname);
+
 // Create a new router instance
 const router = createRouter({
   routeTree,
@@ -21,6 +23,7 @@ const router = createRouter({
     user: buildUser("fr"),
     queryClient,
   },
+  basepath: location.pathname.replace(/\/funds\/?/, ""),
   defaultPendingComponent: () => <>Default loading...</>,
   defaultErrorComponent: ({ error }) => <ErrorComponent error={error} />,
   defaultPreload: "intent",
@@ -29,6 +32,8 @@ const router = createRouter({
   defaultPreloadStaleTime: 0,
   defaultPendingMinMs: 0,
   defaultPendingMs: 0,
+  trailingSlash: "preserve",
+  defaultNotFoundComponent: () => <>Not found</>,
 });
 
 // Register the router instance for type safety

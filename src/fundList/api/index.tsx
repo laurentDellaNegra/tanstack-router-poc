@@ -1,10 +1,6 @@
 import { queryOptions } from "@tanstack/react-query";
-import { ApiSearch } from "../../routes/funds";
 
-export const fundListQueryOptions = ({
-  page = 200,
-  type = "todos",
-}: ApiSearch) =>
+export const fundListQueryOptions = ({ page = 200, type = "todos" }) =>
   queryOptions({
     queryKey: ["fundList", { page, type }],
     queryFn: () =>

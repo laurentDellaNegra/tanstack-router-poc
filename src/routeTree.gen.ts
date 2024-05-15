@@ -20,7 +20,7 @@ import { Route as FundsSlugIdImport } from './routes/funds.$slug.$id'
 const FundsRoute = FundsImport.update({
   path: '/funds',
   getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/funds.lazy').then((d) => d.Route))
+} as any)
 
 const IndexRoute = IndexImport.update({
   path: '/',

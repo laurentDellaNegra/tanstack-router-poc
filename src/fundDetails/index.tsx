@@ -9,7 +9,7 @@ export default function FundDetails() {
   const { data } = useSuspenseQuery(fundDetailsQueryOptions(params.id));
   return (
     <div>
-      <Link from={route.id} to="/">
+      <Link from={route.id} to="/funds">
         Back
       </Link>
       <h1>Fund Details - params id: {params.id} </h1>

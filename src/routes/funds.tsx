@@ -1,7 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { fundListQueryOptions } from "../fundList/api";
-
+import FundList from "../fundList";
 import { z } from "zod";
+import { fundListQueryOptions } from "../fundList/api";
+import { commonQueryOptions } from "../common/api";
 
 const apiSearchSchema = z.object({
   page: z.number().optional().catch(200),
@@ -9,11 +10,12 @@ const apiSearchSchema = z.object({
   isMenuOpened: z.boolean().optional().catch(false),
 });
 
-export type ApiSearch = z.infer<typeof apiSearchSchema>;
-
 export const Route = createFileRoute("/funds")({
   validateSearch: (search) => apiSearchSchema.parse(search),
   loaderDeps: ({ search: { page, type } }) => ({ page, type }),
-  loader: ({ context, deps }) =>
-    context.queryClient.ensureQueryData(fundListQueryOptions(deps)),
+  loader: ({ context, deps }) => {
+    context.queryClient.ensureQueryData(fundListQueryOptions(deps));
+    context.queryClient.ensureQueryData(commonQueryOptions);
+  },
+  component: () => <FundList />,
 });
